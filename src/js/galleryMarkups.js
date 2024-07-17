@@ -9,7 +9,7 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 // making a function that check if we had any answers/hits in a database of API
 export function createMarkup({ hits }, cardContainer) {
     if (hits.length === 0) {
-        catchError();
+        error();
         return;
     }
 
