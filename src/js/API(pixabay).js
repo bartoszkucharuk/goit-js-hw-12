@@ -21,9 +21,9 @@ function getPictures(imageQuery, page=1) {
 
 
 // making a query to the API that returns answers for user's searching input
-export function getPictures(query) {
+export async function getPictures(query) {
     return fetch(`${baseURL}?key=${myPixabayKey}&q=${query}&image_type=${image_type}&orientation=${orientation}&safesearch=${safesearch}`)
-        .then((response) => {
+        .then((response) => { await
             if (!response.ok) {
                 throw new Error(response.status);
             }
