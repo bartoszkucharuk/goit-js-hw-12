@@ -1,34 +1,12 @@
 // re-fresh API and gallery mark-up
-import axios from "axios";
-const API_KEY = "44872402-0762bbf0a5ccd686fb6258473";
-const BASE_URL = "https://pixabay.com/api/"
-
-async function getImages(query, page) { 
-    const params = {
-        key: API_KEY,
-        q: query,
-        image_type: "photo",
-        orientation: "horizontal",
-        safesearch: true,
-        page: page,
-        per_page: 20,
-    };
-
-    try {
-        const response = await axios.get(BASE_URL, { params });
-        return response.data;
-        } catch (error) {
-        throw new Error("Fetch request failed");
-     }
-    }
-
-
+    // DONE
 
 // PRE-settings in MAIN.js
 // 1. import pop - ups library from iziToasts;
 // 2. import gallery library from simplelightbox;
 // 3. import API settings;
 // 4. import gallery making functions;
+    // DONE
 
 // event listeners settings
 // 5. const form;
@@ -56,5 +34,14 @@ async function getImages(query, page) {
 // making IF formule for iziToasts, for check if the query isn't empty, hide loader and get whole code as response [return response]
 
 // TRY / CATCH
+
+import iziToast from "iziToast";
+import "iziToast/dist/css/iziToast.min.css";
+import SimpleLightBox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
+import { getImages } from "./js/API_pixabay.js";
+import { createMarkup } from "./js/galleryMarkups.js";
+
 
 
