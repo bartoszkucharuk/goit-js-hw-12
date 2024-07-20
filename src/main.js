@@ -1,3 +1,5 @@
+// re-fresh API and gallery mark-up
+
 // PRE-settings in MAIN.js
 // 1. import pop - ups library from iziToasts;
 // 2. import gallery library from simplelightbox;
