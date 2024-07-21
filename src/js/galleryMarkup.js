@@ -27,11 +27,6 @@ export function createMarkup(data) {
   `).join('');
 }
 
-
-
-
-
-
 // export function createMarkup({ hits }, cardContainer) {
 //     if (hits.length === 0) {
 //         catchError();
