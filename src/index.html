@@ -5,19 +5,28 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoIT JS HW-11</title>
+  <title>goit-js-hw-12</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loaders.css/loaders.min.css" />
   <link rel="stylesheet" href="./css/styles.css" />
-  <script type="module" src="./main.js" defer></script>
 </head>
 
 <body>
-  <form class="search-form">
-    <input type="text" class="search-input" name="search" placeholder="Search images..." />
-    <button type="submit" class="submit-button">Search</button>
-  </form>
-
-  <span class="loader"></span>
-  <ul class="card-container"></ul>
+ 
+  <header class="header">
+    <form id="search-form">
+      <input type="text" name="query" placeholder="Search images..." required />
+      <button type="submit">Search</button>
+    </form>
+  </header>
+  <main>
+    <div id="gallery" class="gallery"></div>
+    <div class="button-container">
+      <button id="load-more-btn" style="display: none">Load more</button>
+    </div>
+    <div id="loader" class="loader" style="display: none"></div>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  <script type="module" src="./main.js"></script>
 </body>
 
 </html>
