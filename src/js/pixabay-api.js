@@ -15,6 +15,7 @@ export async function fetchImages(query, page = 1) {
   
   
     
+    // sadf
   
     try {
         const response = await axios.get(BASE_URL, { params });
