@@ -91,13 +91,13 @@ const handleLoadMoreButtonClick = async () => {
             showInfo("We're sorry, but you've reached the end of search results.");
       }
 
-    // const { height: cardHeight } = document
-    //     .querySelector(".gallery-item")
-    //     .getBoundingClientRect();
-    // window.scrollBy({
-    //     top: cardHeight * 2,
-    //     behavior: "smooth",
-    //     });
+    const { height: cardHeight } = document
+        .querySelector(".gallery-item")
+        .getBoundingClientRect();
+    window.scrollBy({
+        top: cardHeight * 2,
+        behavior: "smooth",
+        });
     }
     } catch (error) {
         showError("Something went wrong. Please try again later.");
