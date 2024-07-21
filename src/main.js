@@ -23,22 +23,39 @@ const input = document.querySelector(".search-input");
 const gallery = document.querySelector(".card-container");
 const loader = document.querySelector(".loader");
 const loadMoreButton = document.querySelector(".load-more-button")
-
-
 // event listeners settings
 // 5. const form;
 // 6. const input;
 // 7. const gallery
 // 8. const loader
+// 9. const loadMoreButton
     // DONE
 
-// local variables "LET"
-// 9. current page;
-// 10. min page;
+let currentPage;
+const perPage = 20;
+let maxPage;
+let currentQuery = "";
+// local variables "LET" and constant "CONST"
+// 10. current page;
 // 11. max page;
 // 12. responses view by page(ex. 20, 30 etc);
 // 13. image query(searching images)
+    //DONE
+    
+let lightbox = new simpleLightbox(".list-item a", {
+    captions: true,
+    captionDelay: 250,
+    captionPosition: "bottom",
+    captionsData: "alt",
+});
 // 14. simple lightbox gallery settings
+    // DONE
+
+
+
+
+
+
 
 // starting functionally of search page
 
