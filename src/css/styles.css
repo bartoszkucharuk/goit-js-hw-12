@@ -92,7 +92,7 @@ img {
 .submit-button:hover {
   background-color: #6c8cff;
 }
-
+/* 
 .gallery {
   max-width: 1128px;
   display: flex;
@@ -117,6 +117,7 @@ img {
 .gallery {
   /* box-sizing:border-box;
   border: 1px dashed orangered; */
+  /*
   width: 360px;
   height: 152px;
 }
@@ -124,6 +125,7 @@ img {
 .card-description-list {
   /* box-sizing: border-box;
   border: 1px dashed green; */
+  /*
   display: flex;
   flex-direction: row;
   gap: 16px;
@@ -153,7 +155,7 @@ img {
   line-height: 2.0;
   letter-spacing: 0.04em;
 }
-
+ */
 /* adding loader from cssLoader page */
 .loader {
   display: none;
@@ -215,24 +217,55 @@ img {
   overflow: hidden;
 }
 
+#gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1128px;
+  margin-left: 158px;
+}
 
+.gallery-item {
+  width: 100%;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-.load-more-button {
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.info {
   display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    gap: 10px;
-    border-radius: 8px;
-    padding: 8px 16px;
-    width: 91px;
-    height: 40px;
-    background-color: #4e75ff;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 1.5;
-    letter-spacing: 0.04em;
-    color: #fff;
-    border: none;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  justify-content: space-around;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.info p {
+  margin: 0 5px;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+#load-more-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#load-more-btn:hover {
+  background-color: #218838;
 }
