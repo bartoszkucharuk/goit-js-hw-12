@@ -50,9 +50,35 @@ let lightbox = new simpleLightbox(".list-item a", {
 });
 // 14. simple lightbox gallery settings
     // DONE
+    
+function showLoadButton() { 
+    loadMoreButton.classList.remove("visually-hidden");
+}
+
+function hideLoadButton() { 
+    loadMoreButton.classList.add("visually-hidden");
+}
+
+function showLoader() { 
+    loader.classList.remove("visually-hidden");
+}
+
+function hideLoader() { 
+    loader.classList.add("visually-hidden");
+}
 
 
+// 15. Adding usable instant functions
 
+
+form.addEventListener("submit", async (event) => { 
+    event.preventDefault();
+    let currentQuery = event.target.elements.query.value.trim();
+    currentPage = 1;
+
+    showLoader();
+    
+})
 
 
 
