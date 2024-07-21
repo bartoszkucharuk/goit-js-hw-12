@@ -38,18 +38,33 @@ const createImageMarkup = images => {
   return images
     .map(
       image => `
-    <div class="gallery-item">
-      <a href="${image.largeImageURL}" class="gallery-link">
-        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy"/>
-      </a>
-      <div class="info">
-        <p><strong>Likes:</strong> ${image.likes}</p>
-        <p><strong>Views:</strong> ${image.views}</p>
-        <p><strong>Comments:</strong> ${image.comments}</p>
-        <p><strong>Downloads:</strong> ${image.downloads}</p>
-      </div>
-    </div>
-  `
+            <li class="list-item">
+                <a href="${image.largeImageURL}">
+                    <img class="card-image"
+                    src="${image.webformatURL}"
+                    alt="${image.tags}"
+                    width="360">
+                </a>
+                <ul class="card-description-list">
+                    <li class="card-description-item">
+                        <h3 class="card-description-title">Likes</h3>
+                        <p class="card-description-value">${image.likes}</p>
+                    </li>
+                    <li class="card-description-item">
+                        <h3 class="card-description-title">Views</h3>
+                        <p class="card-description-value">${image.views}</p>
+                    </li>
+                    <li class="card-description-item">
+                        <h3 class="card-description-title">Comments</h3>
+                        <p class="card-description-value">${image.comments}</p>
+                    </li>
+                    <li class="card-description-item">
+                        <h3 class="card-description-title">Downloads</h3>
+                        <p class="card-description-value">${image.downloads}</p>
+                    </li>
+                </ul>
+            </li>
+        `
     )
     .join("");
 };
