@@ -4,6 +4,8 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import axios from "axios";
 
+import { createMarkup } from "./js/galleryMarkup.js"
+
 const API_key = "44872402-0762bbf0a5ccd686fb6258473";
 const base_url = "https://pixabay.com/api/";
 
@@ -34,35 +36,38 @@ const getPictures = async (query, page = 1) => {
   }
 };
 
-const createImageMarkup = images => {
-  return images
-    .map(
-      image => `
-    <div class="gallery-item">
-      <a href="${image.largeImageURL}" class="gallery-link">
-        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy"/>
-      </a>
-      <div class="info">
-        <p><strong>Likes:</strong> ${image.likes}</p>
-        <p><strong>Views:</strong> ${image.views}</p>
-        <p><strong>Comments:</strong> ${image.comments}</p>
-        <p><strong>Downloads:</strong> ${image.downloads}</p>
-      </div>
-    </div>
-  `
-    )
-    .join("");
-};
+
+// const createMarkup = images => {
+//   return images
+//     .map(
+//       image => `
+//         <div class="gallery-item">
+//             <a href="${image.largeImageURL}" class="gallery-link">
+//                 <img src="${image.webformatURL}"
+//                 alt="${image.tags}"/>
+//             </a>
+//             <div class="info">
+//                 <p><strong>Likes:</strong> ${image.likes}</p>
+//                 <p><strong>Views:</strong> ${image.views}</p>
+//                 <p><strong>Comments:</strong> ${image.comments}</p>
+//                 <p><strong>Downloads:</strong> ${image.downloads}</p>
+//             </div>
+//         </div>
+//         `
+//     )
+//     .join("");
+// };
 
 const displayImages = images => {
-  const markup = createImageMarkup(images);
-  gallery.insertAdjacentHTML("beforeend", markup);
-  const lightbox = new SimpleLightbox(".gallery-link", {
-    captionsData: "alt",
-    captionDelay: 250,
-    captionPosition: "bottom",
-  });
-  lightbox.refresh();
+    const markup = createMarkup(images);
+    gallery.insertAdjacentHTML("beforeend", markup);
+    
+    const lightbox = new SimpleLightbox(".gallery-link", {
+        captionsData: "alt",
+        captionDelay: 250,
+        captionPosition: "bottom",
+    });
+    lightbox.refresh();
 };
 
 const showError = message => {
@@ -80,69 +85,69 @@ const showInfo = message => {
 };
 
 const handleSearchFormSubmit = async event => {
-  event.preventDefault();
-  query = event.target.elements.query.value.trim();
+    event.preventDefault();
+    query = event.target.elements.query.value.trim();
 
-  if (!query) return;
+    if (!query) return;
 
-  gallery.innerHTML = "";
-  loadMoreButton.style.display = "none";
-  loader.style.display = "flex";
-  page = 1;
+    gallery.innerHTML = "";
+    loadMoreButton.style.display = "none";
+    loader.style.display = "flex";
+    page = 1;
 
-  try {
-    const data = await getPictures(query, page);
-    const images = data.hits;
-    totalHits = data.totalHits;
+    try {
+        const data = await getPictures(query, page);
+        const images = data.hits;
+        totalHits = data.totalHits;
 
     if (images.length === 0) {
-      showError(
-        "Sorry, there are no images matching your search query. Please try again!"
-      );
+        showError(
+            "Sorry, there are no images matching your search query. Please try again!"
+        );
     } else {
-      displayImages(images);
-      if (totalHits > images.length) {
-        loadMoreButton.style.display = "block";
-      }
+        displayImages(images);
+        if (totalHits > images.length) {
+            loadMoreButton.style.display = "block";
+        }
     }
   } catch (error) {
-    showError("Something went wrong. Please try again later.");
+        showError("Something went wrong. Please try again later.");
   } finally {
-    loader.style.display = "none";
+        loader.style.display = "none";
   }
 };
 
 const handleLoadMoreButtonClick = async () => {
-  page += 1;
-  loader.style.display = "flex";
+    page += 1;
+    loader.style.display = "flex";
 
-  try {
-    const data = await getPictures(query, page);
-    const images = data.hits;
+    try {
+        const data = await getPictures(query, page);
+        const images = data.hits;
 
     if (images.length === 0) {
-      loadMoreButton.style.display = "none";
-      showInfo("We're sorry, but you've reached the end of search results.");
-    } else {
-      displayImages(images);
-      if (page * 40 >= totalHits) {
         loadMoreButton.style.display = "none";
         showInfo("We're sorry, but you've reached the end of search results.");
+    } else {
+        displayImages(images);
+        if (page * 40 >= totalHits) {
+            loadMoreButton.style.display = "none";
+            showInfo("We're sorry, but you've reached the end of search results.");
       }
 
-      const { height: cardHeight } = document
-        .querySelector(".gallery-item")
-        .getBoundingClientRect();
-      window.scrollBy({
-        top: cardHeight * 2,
-        behavior: "smooth",
-      });
+    // const { height: cardHeight } = document
+    //     .querySelector(".gallery-item")
+    //     .getBoundingClientRect();
+    // window.scrollBy({
+    //     top: cardHeight * 2,
+    //     behavior: "smooth",
+    //     });
     }
-  } catch (error) {
-    showError("Something went wrong. Please try again later.");
-  } finally {
-    loader.style.display = "none";
-  }
+    } catch (error) {
+        showError("Something went wrong. Please try again later.");
+    } finally {
+        loader.style.display = "none";
+    }
 };
 
 searchForm.addEventListener("submit", handleSearchFormSubmit);
