@@ -1,149 +1,47 @@
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
-import axios from 'axios';
+// re-fresh API and gallery mark-up
+    // DONE
 
-const API_KEY = '44933716-9a3a9b2f063fdc3971bf0291b';
-const BASE_URL = 'https://pixabay.com/api/';
+// PRE-settings in MAIN.js
+// 1. import pop - ups library from iziToasts;
+// 2. import gallery library from simplelightbox;
+// 3. import API settings;
+// 4. import gallery making functions;
+    // DONE
 
-const searchForm = document.getElementById('search-form');
-const gallery = document.getElementById('gallery');
-const loader = document.getElementById('loader');
-const loadMoreBtn = document.getElementById('load-more-btn');
-let query = '';
-let page = 1;
-let totalHits = 0;
+// event listeners settings
+// 5. const form;
+// 6. const input;
+// 7. const gallery
+// 8. const loader
 
-const fetchImages = async (query, page = 1) => {
-  try {
-    const response = await axios.get(`${BASE_URL}`, {
-      params: {
-        key: API_KEY,
-        q: query,
-        image_type: 'photo',
-        orientation: 'horizontal',
-        safesearch: true,
-        page: page,
-        per_page: 40,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response.status);
-  }
-};
+// local variables "LET"
+// 9. current page;
+// 10. min page;
+// 11. max page;
+// 12. responses view by page(ex. 20, 30 etc);
+// 13. image query(searching images)
+// 14. simple lightbox gallery settings
 
-const createImageMarkup = images => {
-  return images
-    .map(
-      image => `
-    <div class="gallery-item">
-      <a href="${image.largeImageURL}" class="gallery-link">
-        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy"/>
-      </a>
-      <div class="info">
-        <p><strong>Likes:</strong> ${image.likes}</p>
-        <p><strong>Views:</strong> ${image.views}</p>
-        <p><strong>Comments:</strong> ${image.comments}</p>
-        <p><strong>Downloads:</strong> ${image.downloads}</p>
-      </div>
-    </div>
-  `
-    )
-    .join('');
-};
+// starting functionally of search page
 
-const displayImages = images => {
-  const markup = createImageMarkup(images);
-  gallery.insertAdjacentHTML('beforeend', markup);
-  const lightbox = new SimpleLightbox('.gallery-link', {
-    captionsData: 'alt',
-    captionDelay: 250,
-    captionPosition: 'bottom',
-  });
-  lightbox.refresh();
-};
+// set form submit button to listener and star query
+// set default page
 
-const showError = message => {
-  iziToast.error({
-    title: 'Error',
-    message: message,
-  });
-};
+// LOADER- make it visible
+// hide load-more button
+// inner html as a gallery markup start
 
-const showInfo = message => {
-  iziToast.info({
-    title: 'Info',
-    message: message,
-  });
-};
+// making IF formule for iziToasts, for check if the query isn't empty, hide loader and get whole code as response [return response]
 
-const handleSearchFormSubmit = async event => {
-  event.preventDefault();
-  query = event.target.elements.query.value.trim();
+// TRY / CATCH
 
-  if (!query) return;
+import iziToast from "iziToast";
+import "iziToast/dist/css/iziToast.min.css";
+import SimpleLightBox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
-  gallery.innerHTML = '';
-  loadMoreBtn.style.display = 'none';
-  loader.style.display = 'flex';
-  page = 1;
+import { getImages } from "./js/API_pixabay.js";
+import { createMarkup } from "./js/galleryMarkups.js";
 
-  try {
-    const data = await fetchImages(query, page);
-    const images = data.hits;
-    totalHits = data.totalHits;
 
-    if (images.length === 0) {
-      showError(
-        'Sorry, there are no images matching your search query. Please try again!'
-      );
-    } else {
-      displayImages(images);
-      if (totalHits > images.length) {
-        loadMoreBtn.style.display = 'block';
-      }
-    }
-  } catch (error) {
-    showError('Something went wrong. Please try again later.');
-  } finally {
-    loader.style.display = 'none';
-  }
-};
 
-const handleLoadMoreBtnClick = async () => {
-  page += 1;
-  loader.style.display = 'flex';
-
-  try {
-    const data = await fetchImages(query, page);
-    const images = data.hits;
-
-    if (images.length === 0) {
-      loadMoreBtn.style.display = 'none';
-      showInfo("We're sorry, but you've reached the end of search results.");
-    } else {
-      displayImages(images);
-      if (page * 40 >= totalHits) {
-        loadMoreBtn.style.display = 'none';
-        showInfo("We're sorry, but you've reached the end of search results.");
-      }
-
-      const { height: cardHeight } = document
-        .querySelector('.gallery-item')
-        .getBoundingClientRect();
-      window.scrollBy({
-        top: cardHeight * 2,
-        behavior: 'smooth',
-      });
-    }
-  } catch (error) {
-    showError('Something went wrong. Please try again later.');
-  } finally {
-    loader.style.display = 'none';
-  }
-};
-
-searchForm.addEventListener('submit', handleSearchFormSubmit);
-loadMoreBtn.addEventListener('click', handleLoadMoreBtnClick);
