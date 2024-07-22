@@ -31,7 +31,7 @@ img {
   object-fit: cover;
 }
 
-.search-form {
+#search-form {
   margin-top: 36px;
   margin-bottom: 32px;
   gap: 8px;
@@ -41,7 +41,7 @@ img {
   flex-direction: row;
 }
 
-.search-input {
+input {
   width: 272px;
   height: 40px;
   box-sizing: border-box;
@@ -55,17 +55,17 @@ img {
   transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.search-input::placeholder {
+input::placeholder {
   line-height: 1.5;
   letter-spacing: 0.04em;
   color: #808080;
 }
 
-.search-input:hover {
+input:hover {
   border-color: #000;
 }
 
-.search-input:focus {
+input:focus {
   border-color: #4e75ff;
 }
 
@@ -92,8 +92,8 @@ img {
 .submit-button:hover {
   background-color: #6c8cff;
 }
-/* 
-.gallery {
+
+.card-container {
   max-width: 1128px;
   display: flex;
   flex-wrap: wrap;
@@ -114,18 +114,16 @@ img {
   justify-content: space-between;
 }
 
-.gallery {
-  /* box-sizing:border-box;
-  border: 1px dashed orangered; */
-  /*
+.card-image {
+  box-sizing:border-box;
+  border: 1px dashed orangered;
   width: 360px;
   height: 152px;
 }
 
 .card-description-list {
-  /* box-sizing: border-box;
-  border: 1px dashed green; */
-  /*
+  box-sizing: border-box;
+  border: 1px dashed green;
   display: flex;
   flex-direction: row;
   gap: 16px;
@@ -155,8 +153,7 @@ img {
   line-height: 2.0;
   letter-spacing: 0.04em;
 }
- */
-/* adding loader from cssLoader page */
+
 .loader {
   display: none;
   width: 48px;
@@ -202,70 +199,4 @@ img {
   50% {
     transform: scale(1) translate(-50%, -50%);
   }
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-}
-
-#gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 1128px;
-  margin-left: 158px;
-}
-
-.gallery-item {
-  width: 100%;
-  margin: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.gallery-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.info {
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  text-align: left;
-}
-
-.info p {
-  margin: 0 5px;
-  text-align: center;
-}
-
-.button-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-#load-more-button {
-  padding: 10px 20px;
-  background-color: #28a745;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#load-more-btn:hover {
-  background-color: #218838;
 }
